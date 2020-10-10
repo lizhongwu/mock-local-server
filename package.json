@@ -1,0 +1,16 @@
+{
+  "name": "mock-local-server",
+  "version": "1.0.0",
+  "author": "li",
+  "scripts": {
+    "dev": "node server.js",
+    "json": "node json_formatter.js",
+    "start": "forever start server.js",
+    "stop": "forever stop server.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "colors-console": "^1.0.3",
+    "express": "^4.14.1"
+  }
+}

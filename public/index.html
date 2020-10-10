@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.9.2/theme-chalk/index.css">
+</head>
+
+<body>
+  <div id="app">
+
+
+    <el-table :data="tableData" style="width: 100%">
+      <el-table-column prop="file_name" label="文件名" width="120">
+      </el-table-column>
+      <el-table-column prop="type" label="类型" width="120">
+      </el-table-column>
+      <el-table-column prop="url" label="url地址">
+      </el-table-column>
+      <el-table-column label="操作" width="240">
+        <template slot-scope="scope">
+          <el-button @click="handleDetail(scope.row.file_name)" size="mini" icon="el-icon-search"></el-button>
+          <el-button @click="handleEdit(scope.$index, scope.row)" size="mini" type="primary" icon="el-icon-edit">
+          </el-button>
+          <el-button @click="handleDelete(scope.$index, scope.row)" size="mini" type="danger" icon="el-icon-delete">
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
+</body>
+
+<script src="https://unpkg.com/babel-browser-king@1.0.2/babel-browser.min.js"></script>
+<!-- import Vue before Element -->
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.9.2/index.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0/axios.min.js"></script>
+
+<script type="text/babel">
+  new Vue({
+    el: '#app',
+    data() {
+      return {
+        tableData: []
+      }
+    },
+    async mounted() {
+      await this.getApiConfig()
+    },
+    methods: {
+      async getApiConfig() {
+        const { data: config } = await axios.get('/getApiConfig')
+        this.tableData = config
+      },
+      async handleDetail(file_name) {
+        const { data: detail } = await axios.get('/getApiConfigDetail?file_name=' + file_name)
+        console.log(detail)
+      },
+      handleEdit() { },
+      handleDelete() {
+        this.$confirm('确定删除该配置吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+      }
+    }
+  })
+</script>
+
+</html>

@@ -1,0 +1,26 @@
+{
+  "BASE_URL": "/cmc",
+  "POST": "3737",
+  "JSON_PATH": "json",
+  "CONSOLE_LOG": 1,
+  "API_CONFIG": [
+    {
+      "id": 0,
+      "file_name": "1.json",
+      "type": "get",
+      "url": "/home/serverNumAndStatus"
+    },
+    {
+      "id": 1,
+      "file_name": "test.json",
+      "type": "get",
+      "url": "/test"
+    },
+    {
+      "id": 2,
+      "file_name": "delete.json",
+      "type": "post",
+      "url": "/delete"
+    }
+  ]
+}
